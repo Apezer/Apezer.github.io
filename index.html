@@ -359,7 +359,15 @@ mjx-container[display="true"] + br {
   
   <div class="article-entry" itemprop="articleBody">
     
-    
+    <p>RAG是什么</p>
+<p>RAG 是 Retrieval-Augmented Generation（检索增强生成） 的缩写，指的是一种把「外部知识检索」和「大模型生成」结合起来的技术：在模型回答问题前，先从数据库、文档或向量库中检索出最相关的资料，再基于这些真实资料来生成回答，这样可以减少“瞎编”、提高准确性，还能让模型使用最新或私有数据，因此常用于知识库问答、企业内部文档助手、论文/代码辅助等场景。</p>
+<p>一、提问前：知识库构建阶段（离线）</p>
+<pre class="mermaid">flowchart LR
+    A(开始) --&gt; B[初始化]
+    B --&gt; C{是否成功}
+    C -- 是 --&gt; D[[进入主程序]]
+    C -- 否 --&gt; E((失败))</pre>
+
     
 
     
