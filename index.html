@@ -417,7 +417,132 @@ mjx-container[display="true"] + br {
 <li><a target="_blank" rel="noopener" href="https://github.com/bulletphysics/bullet3">GitHub 仓库</a></li>
 <li><a target="_blank" rel="noopener" href="https://github.com/bulletphysics/bullet3/tree/master/examples/pybullet">PyBullet 环境示例</a></li>
 </ul>
-<h1>1、<code>loadURDF</code></h1>
+<h1>1、<code>createCollisionShape</code></h1>
+<p>在 PyBullet 中，<code>createCollisionShape</code> 函数用于定义一个物体的物理边界（碰撞体）。它决定了物体在仿真世界中如何与其他物体发生碰撞、反弹或支撑，但不决定物体的外貌。</p>
+<p>通常它需要与 <code>createVisualShape</code>（定义外观）配合使用，最后通过 <code>createMultiBody</code> 合成一个完整的物体。</p>
+<h2 id="1-函数基本语法">1. 函数基本语法</h2>
+<pre><code>p.createCollisionShape(shapeType, radius, halfExtents, height, meshScale, ...)
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>shapeType</code></td>
+<td>形状类型</td>
+<td><code>p.GEOM_BOX</code>（方块）、<code>p.GEOM_SPHERE</code>（球体）</td>
+</tr>
+<tr>
+<td><code>radius</code></td>
+<td>半径</td>
+<td>仅用于球体或胶囊体</td>
+</tr>
+<tr>
+<td><code>halfExtents</code></td>
+<td>半长宽高 <code>[x, y, z]</code></td>
+<td>用于方块。注意是中心到边的距离（即边长的一半）</td>
+</tr>
+<tr>
+<td><code>height</code></td>
+<td>高度</td>
+<td>用于圆柱体或胶囊体</td>
+</tr>
+<tr>
+<td><code>meshScale</code></td>
+<td>缩放比例</td>
+<td>用于导入的 <code>.obj</code> 或 <code>.stl</code> 网格文件</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2-shapeType-常用类型：">2. shapeType 常用类型：</h2>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>p.GEOM_BOX</code></td>
+<td>立方体或长方体</td>
+</tr>
+<tr>
+<td><code>p.GEOM_SPHERE</code></td>
+<td>球体</td>
+</tr>
+<tr>
+<td><code>p.GEOM_CYLINDER</code></td>
+<td>圆柱体</td>
+</tr>
+<tr>
+<td><code>p.GEOM_CAPSULE</code></td>
+<td>胶囊体</td>
+</tr>
+<tr>
+<td><code>p.GEOM_MESH</code></td>
+<td>网格模型</td>
+</tr>
+</tbody>
+</table>
+<h1>2、<code>createVisualShape</code></h1>
+<p>在 PyBullet 中，<code>createVisualShape</code> 函数专门用于定义物体的 <strong>视觉外观</strong>。<br>
+简单来说，<code>createCollisionShape</code> 决定了物体“摸起来”是什么样的（物理碰撞），而 <code>createVisualShape</code> 决定了物体“看起来”是什么样的（颜色、纹理、形状）。</p>
+<h2 id="1-函数基本语法-2">1. 函数基本语法</h2>
+<pre><code>p.createVisualShape(shapeType, radius, halfExtents, length, rgbColor, specularColor, visualFramePosition)
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>shapeType</code></td>
+<td>形状类型</td>
+<td><code>p.GEOM_BOX</code>, <code>p.GEOM_SPHERE</code>, <code>p.GEOM_CYLINDER</code></td>
+</tr>
+<tr>
+<td><code>radius</code></td>
+<td>半径</td>
+<td>用于球体或圆柱体</td>
+</tr>
+<tr>
+<td><code>halfExtents</code></td>
+<td>半长宽高</td>
+<td>用于方块 <code>[x, y, z]</code></td>
+</tr>
+<tr>
+<td><code>length</code></td>
+<td>长度/高度</td>
+<td>用于圆柱体或胶囊体</td>
+</tr>
+<tr>
+<td><code>rgbColor</code></td>
+<td>颜色与透明度</td>
+<td><code>[R, G, B, A]</code>，范围 0 到 1。例如 <code>[1, 0, 0, 1]</code> 是纯红</td>
+</tr>
+<tr>
+<td><code>specularColor</code></td>
+<td>高光颜色</td>
+<td><code>[R, G, B]</code>，决定物体表面反光颜色</td>
+</tr>
+<tr>
+<td><code>visualFramePosition</code></td>
+<td>视觉偏移</td>
+<td>视觉模型相对于质心的偏移位置 <code>[x, y, z]</code></td>
+</tr>
+</tbody>
+</table>
+<h1>3、<code>loadURDF</code></h1>
 <h2 id="1-基本定义">1. 基本定义</h2>
 <p><code>loadURDF</code> 是一个 API 接口，专门用于解析 <strong>URDF (Unified Robot Description Format, 统一机器人描述格式)</strong> 文件。URDF 是一种基于 XML 的文件格式，详尽地描述了机器人的：</p>
 <ul>
@@ -473,7 +598,7 @@ mjx-container[display="true"] + br {
 </table>
 <h2 id="3-pybullet中的坐标系">3. pybullet中的坐标系</h2>
 <p>PyBullet 使用右手坐标系：<strong>红色表示 X 轴，绿色表示 Y 轴，蓝色表示 Z 轴</strong>。默认情况下，Z 轴指向上方，X-Y 平面为地面。</p>
-<h1>2、<code>setJointMotorControl2</code></h1>
+<h1>4、<code>setJointMotorControl2</code></h1>
 <p>在 PyBullet 中，<code>setJointMotorControl2</code> 是控制机器人运动的核心函数。它允许你为特定的关节 (Joint) 设定控制模式，比如控制它的<strong>位置、速度或力矩</strong>。</p>
 <p>对于你的桥式起重机，无论是控制大车滑行还是小车平移，都要靠这个函数来实现。</p>
 <h2 id="函数原型与核心参数">函数原型与核心参数</h2>
@@ -513,17 +638,17 @@ mjx-container[display="true"] + br {
 </tr>
 </tbody>
 </table>
-<h1>3、<code>getNumJoints</code></h1>
+<h1>5、<code>getNumJoints</code></h1>
 <h2 id="1-函数定义与返回值">1. 函数定义与返回值</h2>
 <p><code>getNumJoints(bodyUniqueId)</code>只有一个参数，即你加载模型时获得的 ID（如 <code>crane_id</code>）。它返回一个整数，表示该模型包含的关节（Joint）总数。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 获取起重机有多少个关节</span></span><br><span class="line">num_joints = p.getNumJoints(crane_id)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f"该起重机模型共有 <span class="subst">{num_joints}</span> 个关节"</span>)</span><br></pre></td></tr></table></figure>
 <h2 id="2-为什么它对你很重要？">2. 为什么它对你很重要？</h2>
 <p>在 PyBullet 中，关节的索引（Index）是从 0 到 <code>getNumJoints - 1</code> 的连续整数。你之所以需要这个函数，主要有以下三个原因：</p>
 <h3 id="A-遍历并识别关节">A. 遍历并识别关节</h3>
-<p>当你从 SolidWorks 导出 URDF 时，大车、小车、吊绳、吊钩各占一个关节。通过 <code>getNumJoints</code> 配合 <code>getJoinInfo</code> ，你可以打印出所有关节的名字，从而确定你要控制的那个零件到底是几号。</p>
+<p>当你从 SolidWorks 导出 URDF 时，大车、小车、吊绳、吊钩各占一个关节。通过 <code>getNumJoints</code> 配合 <code>getJointInfo</code> ，你可以打印出所有关节的名字，从而确定你要控制的那个零件到底是几号。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(p.getNumJoints(crane_id)):</span><br><span class="line">    info = p.getJointInfo(crane_id, i)</span><br><span class="line">    <span class="comment"># info[0] 是索引，info[1] 是关节名称，info[2] 是关节类型</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f"Index: <span class="subst">{info[<span class="number">0</span>]}</span>, Name: <span class="subst">{info[<span class="number">1</span>].decode(<span class="string">'utf-8'</span>)}</span>, Type: <span class="subst">{info[<span class="number">2</span>]}</span>"</span>)</span><br></pre></td></tr></table></figure>
-<h1>4、<code>getJoinInfo</code></h1>
-<h1>1. 函数基本用法</h1>
+<h1>6、<code>getJointInfo</code></h1>
+<h2 id="1-函数基本用法">1. 函数基本用法</h2>
 <p><code>getJointInfo</code> 需要两个核心参数：</p>
 <ul>
 <li><strong>bodyUniqueId</strong>：模型的 ID（如 <code>crane_id</code>）。</li>
