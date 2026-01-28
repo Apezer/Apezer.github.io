@@ -6,20 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>你好世界 | Apezer的硬核空间</title>
+  <title>PyBullet 简介 | Apezer的硬核空间</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="欢迎来到 Hexo！这是你的第一篇文章。查看文档获取更多信息。如果你在使用 Hexo 时遇到任何问题，可以在故障排除中找到答案，或者你可以在 GitHub 上向我提问。 快速开始 创建新文章 1$ hexo new &quot;My New Post&quot; 更多信息：写作 运行服务器 1$ hexo server 更多信息：服务器 生成静态文件 1$ hexo generate 更多信息：生成 部署到远程站点">
+  <meta name="description" content="PyBullet 是基于 Bullet Physics SDK 开发的 Python 物理仿真库。具有安装简单、运行高效、功能全面等特点，是机器人仿真和强化学习的首选工具。 核心特点  🚀 易于安装：pip install pybullet 一键安装 ⚡ 高性能：支持实时仿真，可进行 1000+ Hz 的控制循环 🌐 跨平台：支持 Windows、Linux、macOS 🎯 功能全面：刚体&#x2F;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="你好世界">
-<meta property="og:url" content="http://example.com/2025/12/21/hello-world/index.html">
+<meta property="og:title" content="PyBullet 简介">
+<meta property="og:url" content="http://example.com/2026/01/27/pybullet%E7%AE%80%E4%BB%8B/index.html">
 <meta property="og:site_name" content="Apezer的硬核空间">
-<meta property="og:description" content="欢迎来到 Hexo！这是你的第一篇文章。查看文档获取更多信息。如果你在使用 Hexo 时遇到任何问题，可以在故障排除中找到答案，或者你可以在 GitHub 上向我提问。 快速开始 创建新文章 1$ hexo new &quot;My New Post&quot; 更多信息：写作 运行服务器 1$ hexo server 更多信息：服务器 生成静态文件 1$ hexo generate 更多信息：生成 部署到远程站点">
+<meta property="og:description" content="PyBullet 是基于 Bullet Physics SDK 开发的 Python 物理仿真库。具有安装简单、运行高效、功能全面等特点，是机器人仿真和强化学习的首选工具。 核心特点  🚀 易于安装：pip install pybullet 一键安装 ⚡ 高性能：支持实时仿真，可进行 1000+ Hz 的控制循环 🌐 跨平台：支持 Windows、Linux、macOS 🎯 功能全面：刚体&#x2F;">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-12-21T04:09:00.000Z">
-<meta property="article:modified_time" content="2026-01-19T05:36:00.368Z">
+<meta property="article:published_time" content="2026-01-27T06:40:33.000Z">
+<meta property="article:modified_time" content="2026-01-27T12:00:46.589Z">
 <meta property="article:author" content="Apezer">
+<meta property="article:tag" content="PyBullet">
+<meta property="article:tag" content="强化学习">
+<meta property="article:tag" content="机器人">
+<meta property="article:tag" content="物理仿真">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Apezer的硬核空间" type="application/atom+xml">
@@ -308,14 +312,14 @@ mjx-container[display="true"] + br {
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-hello-world" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-pybullet简介" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
     <h1 class="article-title" itemprop="name">
-      你好世界
+      PyBullet 简介
     </h1>
   
 
@@ -327,8 +331,8 @@ mjx-container[display="true"] + br {
               <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
         </span>
 
-<a href="/2025/12/21/hello-world/" class="archive-article-date">
-        <time datetime="2025-12-21T04:09:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-12-21</time>
+<a href="/2026/01/27/pybullet%E7%AE%80%E4%BB%8B/" class="archive-article-date">
+        <time datetime="2026-01-27T06:40:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-01-27</time>
 </a>
 
   
@@ -341,7 +345,7 @@ mjx-container[display="true"] + br {
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">158字</span>
+      <span class="post-count">1.5k字</span>
     </span>
   </span>
 
@@ -350,7 +354,7 @@ mjx-container[display="true"] + br {
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">1分</span>
+      <span class="post-count">5分</span>
     </span>
   </span>
 </div>
@@ -361,26 +365,247 @@ mjx-container[display="true"] + br {
   
   <div class="article-entry" itemprop="articleBody">
     
-    <p>欢迎来到 <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>！这是你的第一篇文章。查看<a target="_blank" rel="noopener" href="https://hexo.io/docs/">文档</a>获取更多信息。如果你在使用 Hexo 时遇到任何问题，可以在<a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">故障排除</a>中找到答案，或者你可以在 <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a> 上向我提问。</p>
+    <p>PyBullet 是基于 Bullet Physics SDK 开发的 Python 物理仿真库。具有<strong>安装简单</strong>、<strong>运行高效</strong>、<strong>功能全面</strong>等特点，是机器人仿真和强化学习的首选工具。</p>
+<h2 id="核心特点">核心特点</h2>
+<ul>
+<li>🚀 <strong>易于安装</strong>：<code>pip install pybullet</code> 一键安装</li>
+<li>⚡ <strong>高性能</strong>：支持实时仿真，可进行 1000+ Hz 的控制循环</li>
+<li>🌐 <strong>跨平台</strong>：支持 Windows、Linux、macOS</li>
+<li>🎯 <strong>功能全面</strong>：刚体/多体动力学、碰撞检测、约束求解、软体物理</li>
+<li>👁️ <strong>内置可视化</strong>：支持 OpenGL 渲染和合成摄像头</li>
+<li>🎮 <strong>VR 支持</strong>：支持 VR 设备与传感器仿真</li>
+</ul>
+<h2 id="主要应用">主要应用</h2>
+<h3 id="机器人仿真与控制">机器人仿真与控制</h3>
+<ul>
+<li>支持导入 URDF/SDF 格式的机器人模型</li>
+<li>机械臂、足式机器人、无人机仿真</li>
+<li>逆运动学求解、力矩控制</li>
+</ul>
+<h3 id="强化学习环境">强化学习环境</h3>
+<ul>
+<li>提供 OpenAI Gym 标准接口</li>
+<li>预构建环境（AntBulletEnv、HalfCheetahBulletEnv 等）</li>
+<li>机器人行走、物体操纵等任务学习</li>
+</ul>
+<h3 id="其他应用">其他应用</h3>
+<ul>
+<li>碰撞检测与路径规划</li>
+<li>游戏物理引擎</li>
+<li>计算机视觉数据合成</li>
+</ul>
 <h2 id="快速开始">快速开始</h2>
-<h3 id="创建新文章">创建新文章</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>更多信息：<a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">写作</a></p>
-<h3 id="运行服务器">运行服务器</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>更多信息：<a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">服务器</a></p>
-<h3 id="生成静态文件">生成静态文件</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>更多信息：<a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">生成</a></p>
-<h3 id="部署到远程站点">部署到远程站点</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>更多信息：<a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">部署</a></p>
-<h3 id="初始化新站点">初始化新站点</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init ***</span><br></pre></td></tr></table></figure>
-<p>更多信息：<a target="_blank" rel="noopener" href="https://hexo.io/docs/quick-start.html">初始化</a></p>
-<h3 id="hexo主题">hexo主题</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new theme ***</span><br></pre></td></tr></table></figure>
-<p>更多信息：<a target="_blank" rel="noopener" href="https://hexo.io/docs/themes.html">主题</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pybullet <span class="keyword">as</span> p</span><br><span class="line"></span><br><span class="line"><span class="comment"># 连接服务器</span></span><br><span class="line">client = p.connect(p.GUI)</span><br><span class="line">p.setGravity(<span class="number">0</span>, <span class="number">0</span>, -<span class="number">9.8</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 加载模型</span></span><br><span class="line">plane = p.loadURDF(<span class="string">"plane.urdf"</span>)</span><br><span class="line">robot = p.loadURDF(<span class="string">"robot.urdf"</span>, basePosition=[<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 仿真循环</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1000</span>):</span><br><span class="line">    p.stepSimulation()</span><br><span class="line">    pos, orn = p.getBasePositionAndOrientation(robot)</span><br><span class="line">    </span><br><span class="line">p.disconnect()</span><br></pre></td></tr></table></figure>
+<h2 id="与其他引擎对比">与其他引擎对比</h2>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>PyBullet</th>
+<th>Gazebo</th>
+<th>MuJoCo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>安装难度</td>
+<td>⭐ 简单</td>
+<td>⭐⭐⭐ 复杂</td>
+<td>⭐⭐ 中等</td>
+</tr>
+<tr>
+<td>运行速度</td>
+<td>⭐⭐⭐⭐</td>
+<td>⭐⭐⭐</td>
+<td>⭐⭐⭐⭐⭐</td>
+</tr>
+<tr>
+<td>Python 支持</td>
+<td>✅ 优秀</td>
+<td>✅ 好</td>
+<td>✅ 好</td>
+</tr>
+<tr>
+<td>开源</td>
+<td>✅</td>
+<td>✅</td>
+<td>❌</td>
+</tr>
+</tbody>
+</table>
+<h2 id="适用场景">适用场景</h2>
+<p>✅ 快速原型设计、强化学习研究、跨平台兼容需求<br>
+❌ 需要最高精度物理模拟、完整生态系统</p>
+<h2 id="资源">资源</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://docs.google.com/document/d/10sXEhzFRSnvFcl3XxNGhnD4N2SedqwMHQvQatLAQwV0/">官方文档</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/bulletphysics/bullet3">GitHub 仓库</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/bulletphysics/bullet3/tree/master/examples/pybullet">PyBullet 环境示例</a></li>
+</ul>
+<h1>1、<code>loadURDF</code></h1>
+<h2 id="1-基本定义">1. 基本定义</h2>
+<p><code>loadURDF</code> 是一个 API 接口，专门用于解析 <strong>URDF (Unified Robot Description Format, 统一机器人描述格式)</strong> 文件。URDF 是一种基于 XML 的文件格式，详尽地描述了机器人的：</p>
+<ul>
+<li><strong>外观 (Visual)</strong>：模型长什么样。</li>
+<li><strong>物理碰撞形状 (Collision)</strong>：物体占据的空间体积，用于碰撞检测。</li>
+<li><strong>关节 (Joints)</strong>：机械臂或起重机的旋转轴、平移轨道。</li>
+<li><strong>质量属性 (Inertial)</strong>：重量是多少，重心在哪里。</li>
+</ul>
+<hr>
+<h2 id="2-函数语法与常用参数">2. 函数语法与常用参数</h2>
+<pre><code>p.loadURDF(fileName, basePosition, baseOrientation, useFixedBase, globalScaling)
+</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">参数名</th>
+<th style="text-align:left">类型</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>fileName</strong></td>
+<td style="text-align:left">String</td>
+<td style="text-align:left">URDF 文件的路径（如 <code>"r2d2.urdf"</code>）。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>basePosition</strong></td>
+<td style="text-align:left">List</td>
+<td style="text-align:left">初始坐标 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="6.725ex" height="2.262ex" role="img" focusable="false" viewBox="0 -750 2972.3 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mo"><path data-c="5B" d="M118 -250V750H255V710H158V-210H255V-250H118Z"></path></g><g data-mml-node="mi" transform="translate(278,0)"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g><g data-mml-node="mo" transform="translate(850,0)"><path data-c="2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"></path></g><g data-mml-node="mi" transform="translate(1294.7,0)"><path data-c="1D466" d="M21 287Q21 301 36 335T84 406T158 442Q199 442 224 419T250 355Q248 336 247 334Q247 331 231 288T198 191T182 105Q182 62 196 45T238 27Q261 27 281 38T312 61T339 94Q339 95 344 114T358 173T377 247Q415 397 419 404Q432 431 462 431Q475 431 483 424T494 412T496 403Q496 390 447 193T391 -23Q363 -106 294 -155T156 -205Q111 -205 77 -183T43 -117Q43 -95 50 -80T69 -58T89 -48T106 -45Q150 -45 150 -87Q150 -107 138 -122T115 -142T102 -147L99 -148Q101 -153 118 -160T152 -167H160Q177 -167 186 -165Q219 -156 247 -127T290 -65T313 -9T321 21L315 17Q309 13 296 6T270 -6Q250 -11 231 -11Q185 -11 150 11T104 82Q103 89 103 113Q103 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(1784.7,0)"><path data-c="2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"></path></g><g data-mml-node="mi" transform="translate(2229.3,0)"><path data-c="1D467" d="M347 338Q337 338 294 349T231 360Q211 360 197 356T174 346T162 335T155 324L153 320Q150 317 138 317Q117 317 117 325Q117 330 120 339Q133 378 163 406T229 440Q241 442 246 442Q271 442 291 425T329 392T367 375Q389 375 411 408T434 441Q435 442 449 442H462Q468 436 468 434Q468 430 463 420T449 399T432 377T418 358L411 349Q368 298 275 214T160 106L148 94L163 93Q185 93 227 82T290 71Q328 71 360 90T402 140Q406 149 409 151T424 153Q443 153 443 143Q443 138 442 134Q425 72 376 31T278 -11Q252 -11 232 6T193 40T155 57Q111 57 76 -3Q70 -11 59 -11H54H41Q35 -5 35 -2Q35 13 93 84Q132 129 225 214T340 322Q352 338 347 338Z"></path></g><g data-mml-node="mo" transform="translate(2694.3,0)"><path data-c="5D" d="M22 710V750H159V-250H22V-210H119V710H22Z"></path></g></g></g></svg></mjx-container>。默认 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="6.664ex" height="2.262ex" role="img" focusable="false" viewBox="0 -750 2945.3 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mo"><path data-c="5B" d="M118 -250V750H255V710H158V-210H255V-250H118Z"></path></g><g data-mml-node="mn" transform="translate(278,0)"><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z"></path></g><g data-mml-node="mo" transform="translate(778,0)"><path data-c="2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"></path></g><g data-mml-node="mn" transform="translate(1222.7,0)"><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z"></path></g><g data-mml-node="mo" transform="translate(1722.7,0)"><path data-c="2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"></path></g><g data-mml-node="mn" transform="translate(2167.3,0)"><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z"></path></g><g data-mml-node="mo" transform="translate(2667.3,0)"><path data-c="5D" d="M22 710V750H159V-250H22V-210H119V710H22Z"></path></g></g></g></svg></mjx-container>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>baseOrientation</strong></td>
+<td style="text-align:left">List</td>
+<td style="text-align:left">初始姿态（<strong>四元数</strong>）。可以用 <code>p.getQuaternionFromEuler</code> 转换得到。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>useFixedBase</strong></td>
+<td style="text-align:left">Boolean</td>
+<td style="text-align:left"><strong>关键参数！</strong> 设为 <code>True</code>（或 <code>1</code>）时，物体的基座会固定在空间中，不随重力掉落。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>globalScaling</strong></td>
+<td style="text-align:left">Float</td>
+<td style="text-align:left">缩放比例。例如 <code>2.0</code> 会让加载出来的模型变大一倍。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>flags</strong></td>
+<td style="text-align:left">Integer</td>
+<td style="text-align:left">额外加载选项，如 <code>p.URDF_USE_INERTIA_FROM_FILE</code> 使用 URDF 文件中的惯性数据。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3-pybullet中的坐标系">3. pybullet中的坐标系</h2>
+<p>PyBullet 使用右手坐标系：<strong>红色表示 X 轴，绿色表示 Y 轴，蓝色表示 Z 轴</strong>。默认情况下，Z 轴指向上方，X-Y 平面为地面。</p>
+<h1>2、<code>setJointMotorControl2</code></h1>
+<p>在 PyBullet 中，<code>setJointMotorControl2</code> 是控制机器人运动的核心函数。它允许你为特定的关节 (Joint) 设定控制模式，比如控制它的<strong>位置、速度或力矩</strong>。</p>
+<p>对于你的桥式起重机，无论是控制大车滑行还是小车平移，都要靠这个函数来实现。</p>
+<h2 id="函数原型与核心参数">函数原型与核心参数</h2>
+<pre><code>p.setJointMotorControl2(bodyUniqueId, jointIndex, controlMode, targetPosition, targetVelocity, force) 
+</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">参数</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>bodyUniqueId</strong></td>
+<td style="text-align:left">模型的 ID（即 <code>loadURDF</code> 返回的 <code>crane_id</code>）。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>jointIndex</strong></td>
+<td style="text-align:left">关节的索引。大车、小车和吊钩在 URDF 中都有一个唯一的数字编号。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>controlMode</strong></td>
+<td style="text-align:left">控制模式。常用有 <code>p.POSITION_CONTROL</code>（位置）、<code>p.VELOCITY_CONTROL</code>（速度）。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>targetPosition</strong></td>
+<td style="text-align:left">目标位置。仅在位置控制模式下有效（例如让小车移动到 2.0 米处）。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>targetVelocity</strong></td>
+<td style="text-align:left">目标速度。在速度控制模式下，这是你期望达到的恒定速度。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>force</strong></td>
+<td style="text-align:left">最大驱动力（或力矩）。决定了电机的“力气”，如果力太小，可能拉不动沉重的起重机。</td>
+</tr>
+</tbody>
+</table>
+<h1>3、<code>getNumJoints</code></h1>
+<h2 id="1-函数定义与返回值">1. 函数定义与返回值</h2>
+<p><code>getNumJoints(bodyUniqueId)</code>只有一个参数，即你加载模型时获得的 ID（如 <code>crane_id</code>）。它返回一个整数，表示该模型包含的关节（Joint）总数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 获取起重机有多少个关节</span></span><br><span class="line">num_joints = p.getNumJoints(crane_id)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f"该起重机模型共有 <span class="subst">{num_joints}</span> 个关节"</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="2-为什么它对你很重要？">2. 为什么它对你很重要？</h2>
+<p>在 PyBullet 中，关节的索引（Index）是从 0 到 <code>getNumJoints - 1</code> 的连续整数。你之所以需要这个函数，主要有以下三个原因：</p>
+<h3 id="A-遍历并识别关节">A. 遍历并识别关节</h3>
+<p>当你从 SolidWorks 导出 URDF 时，大车、小车、吊绳、吊钩各占一个关节。通过 <code>getNumJoints</code> 配合 <code>getJoinInfo</code> ，你可以打印出所有关节的名字，从而确定你要控制的那个零件到底是几号。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(p.getNumJoints(crane_id)):</span><br><span class="line">    info = p.getJointInfo(crane_id, i)</span><br><span class="line">    <span class="comment"># info[0] 是索引，info[1] 是关节名称，info[2] 是关节类型</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f"Index: <span class="subst">{info[<span class="number">0</span>]}</span>, Name: <span class="subst">{info[<span class="number">1</span>].decode(<span class="string">'utf-8'</span>)}</span>, Type: <span class="subst">{info[<span class="number">2</span>]}</span>"</span>)</span><br></pre></td></tr></table></figure>
+<h1>4、<code>getJoinInfo</code></h1>
+<h1>1. 函数基本用法</h1>
+<p><code>getJointInfo</code> 需要两个核心参数：</p>
+<ul>
+<li><strong>bodyUniqueId</strong>：模型的 ID（如 <code>crane_id</code>）。</li>
+<li><strong>jointIndex</strong>：关节的索引（从 0 到 <code>getNumJoints-1</code>）。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">info = p.getJointInfo(crane_id, <span class="number">0</span>)</span><br><span class="line"><span class="built_in">print</span>(info)</span><br></pre></td></tr></table></figure>
+<h2 id="2-返回值详解（重点）">2. 返回值详解（重点）</h2>
+<p>该函数返回一个包含 17 个元素的元组。对于起重机仿真，最关键的参数如下：</p>
+<table>
+<thead>
+<tr>
+<th>索引</th>
+<th>名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td><code>jointIndex</code></td>
+<td>关节索引（与输入一致）。</td>
+</tr>
+<tr>
+<td>1</td>
+<td><code>jointName</code></td>
+<td>关节名称（如 <code>"trolley_joint"</code>），用于识别大车还是小车。</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>jointType</code></td>
+<td>关节类型（平移、旋转、固定等）。</td>
+</tr>
+<tr>
+<td>8</td>
+<td><code>jointLowerLimit</code></td>
+<td>关节下限位（比如轨道的最左端）。</td>
+</tr>
+<tr>
+<td>9</td>
+<td><code>jointUpperLimit</code></td>
+<td>关节上限位（比如轨道的最右端）。</td>
+</tr>
+<tr>
+<td>12</td>
+<td><code>linkName</code></td>
+<td>该关节所连接的子连杆名称。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3-识别关节类型（jointType）">3. 识别关节类型（jointType）</h2>
+<p>通过 <code>info[2]</code>，你可以判断起重机的各个部件是如何运动的：</p>
+<ul>
+<li><strong>p.JOINT_PRISMATIC (1)</strong>：平移关节。大车、小车的滑动通常属于这一类。</li>
+<li><strong>p.JOINT_REVOLUTE (0)</strong>：旋转关节。有角度限位，常用于模拟吊绳的摆动。</li>
+<li><strong>p.JOINT_FIXED (4)</strong>：固定关节。不可移动，通常用于连接装饰性零件。</li>
+<li><strong>p.JOINT_SPHERICAL (3)</strong>：球型关节。可以在三个方向旋转。</li>
+</ul>
 
     
 
@@ -427,7 +652,7 @@ mjx-container[display="true"] + br {
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="http://example.com/2025/12/21/hello-world/" title="你好世界" target="_blank">http://example.com/2025/12/21/hello-world/</a>
+          <a href="http://example.com/2026/01/27/pybullet简介/" title="PyBullet 简介" target="_blank">http://example.com/2026/01/27/pybullet简介/</a>
         </li>
         
         <li>
@@ -444,7 +669,41 @@ mjx-container[display="true"] + br {
   <div class="article-info article-info-index">
     
     
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PyBullet</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">物理仿真</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">机器人</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">强化学习</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
     
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/机器人与仿真//" class="article-tag-list-link color2">机器人与仿真</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
 
     
 
@@ -494,7 +753,7 @@ mjx-container[display="true"] + br {
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2025/12/21/hello-world/" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2026/01/27/pybullet%E7%AE%80%E4%BB%8B/" alt="微信分享二维码"> -->
     </div>
 </div>
 
@@ -509,15 +768,11 @@ mjx-container[display="true"] + br {
 
 <nav id="article-nav">
   
-    <a href="/2025/12/23/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E6%8E%A7%E5%88%B6%E7%90%86%E8%AE%BA%E7%AC%94%E8%AE%B0/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          我的第一篇控制理论笔记
-        
-      </div>
-    </a>
   
+    <a href="/2026/01/14/%E5%9F%BA%E4%BA%8ELLM%E4%B8%8ERAG%E7%9A%84%E5%AE%89%E5%85%A8%E7%9F%A5%E8%AF%86%E9%97%AE%E7%AD%94%E7%B3%BB%E7%BB%9F%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">基于LLM与RAG的安全知识问答系统开发笔记</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
