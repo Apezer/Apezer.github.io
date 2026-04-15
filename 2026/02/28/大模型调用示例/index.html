@@ -366,18 +366,19 @@ mjx-container[display="true"] + br {
     
     <p>本文记录了几种主流大语言模型（LLM）的 Python 调用方式，包括 <strong>DeepSeek</strong>、<strong>Google Gemini</strong>、<strong>通义千问（Qwen）</strong> 和 <strong>讯飞星火（Spark）</strong>。所有示例均使用 <code>python-dotenv</code> 从 <code>.env</code> 文件中加载 API 密钥，避免在代码中硬编码敏感信息。</p>
 <span id="more"></span>
-
-<h2 id="前置准备"><a href="#前置准备" class="headerlink" title="前置准备"></a>前置准备</h2><h3 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install openai python-dotenv google-genai sparkai</span><br></pre></td></tr></table></figure>
-
-<h3 id="env-文件配置"><a href="#env-文件配置" class="headerlink" title=".env 文件配置"></a><code>.env</code> 文件配置</h3><p>在项目根目录创建 <code>.env</code> 文件，按需填入以下密钥：</p>
+<h2 id="前置准备">前置准备</h2>
+<h3 id="安装依赖">安装依赖</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install openai python-dotenv google-genai sparkai</span><br></pre></td></tr></table></figure>
+<h3 id="env-文件配置"><code>.env</code> 文件配置</h3>
+<p>在项目根目录创建 <code>.env</code> 文件，按需填入以下密钥：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># DeepSeek</span><br><span class="line">DEEPSEEK_API_KEY=你的DeepSeek API密钥</span><br><span class="line"></span><br><span class="line"># Google Gemini</span><br><span class="line">GEMINI_API_KEY=你的Gemini API密钥</span><br><span class="line"></span><br><span class="line"># 通义千问（阿里云 DashScope）</span><br><span class="line">DASHSCOPE_API_KEY=你的DashScope API密钥</span><br><span class="line"></span><br><span class="line"># 讯飞星火</span><br><span class="line">SPARKAI_APP_ID=你的APP_ID</span><br><span class="line">SPARKAI_API_KEY=你的API_KEY</span><br><span class="line">SPARKAI_API_SECRET=你的API_SECRET</span><br></pre></td></tr></table></figure>
-
 <hr>
-<h2 id="一、DeepSeek"><a href="#一、DeepSeek" class="headerlink" title="一、DeepSeek"></a>一、DeepSeek</h2><p>DeepSeek 兼容 OpenAI SDK 的接口格式，只需将 <code>base_url</code> 指向 DeepSeek 的 API 地址即可。</p>
-<h3 id="基本调用"><a href="#基本调用" class="headerlink" title="基本调用"></a>基本调用</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> openai <span class="keyword">import</span> OpenAI</span><br><span class="line"><span class="keyword">from</span> dotenv <span class="keyword">import</span> load_dotenv</span><br><span class="line"></span><br><span class="line">load_dotenv()</span><br><span class="line"></span><br><span class="line">client = OpenAI(</span><br><span class="line">    api_key=os.environ.get(<span class="string">'DEEPSEEK_API_KEY'</span>),</span><br><span class="line">    base_url=<span class="string">"https://api.deepseek.com"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">response = client.chat.completions.create(</span><br><span class="line">    model=<span class="string">"deepseek-chat"</span>,</span><br><span class="line">    messages=[{<span class="string">"role"</span>: <span class="string">"user"</span>, <span class="string">"content"</span>: <span class="string">"你好"</span>}],</span><br><span class="line">    stream=<span class="literal">False</span></span><br><span class="line">)</span><br><span class="line"><span class="built_in">print</span>(response.choices[<span class="number">0</span>].message.content)</span><br></pre></td></tr></table></figure>
-
-<h3 id="流式输出"><a href="#流式输出" class="headerlink" title="流式输出"></a>流式输出</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">response = client.chat.completions.create(</span><br><span class="line">    model=<span class="string">"deepseek-chat"</span>,</span><br><span class="line">    messages=[{<span class="string">"role"</span>: <span class="string">"user"</span>, <span class="string">"content"</span>: <span class="string">"你好"</span>}],</span><br><span class="line">    stream=<span class="literal">True</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">for</span> chunk <span class="keyword">in</span> response:</span><br><span class="line">    <span class="keyword">if</span> chunk.choices[<span class="number">0</span>].delta.content:</span><br><span class="line">        <span class="built_in">print</span>(chunk.choices[<span class="number">0</span>].delta.content, end=<span class="string">""</span>, flush=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
-
+<h2 id="一、DeepSeek">一、DeepSeek</h2>
+<p>DeepSeek 兼容 OpenAI SDK 的接口格式，只需将 <code>base_url</code> 指向 DeepSeek 的 API 地址即可。</p>
+<h3 id="基本调用">基本调用</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> openai <span class="keyword">import</span> OpenAI</span><br><span class="line"><span class="keyword">from</span> dotenv <span class="keyword">import</span> load_dotenv</span><br><span class="line"></span><br><span class="line">load_dotenv()</span><br><span class="line"></span><br><span class="line">client = OpenAI(</span><br><span class="line">    api_key=os.environ.get(<span class="string">'DEEPSEEK_API_KEY'</span>),</span><br><span class="line">    base_url=<span class="string">"https://api.deepseek.com"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">response = client.chat.completions.create(</span><br><span class="line">    model=<span class="string">"deepseek-chat"</span>,</span><br><span class="line">    messages=[{<span class="string">"role"</span>: <span class="string">"user"</span>, <span class="string">"content"</span>: <span class="string">"你好"</span>}],</span><br><span class="line">    stream=<span class="literal">False</span></span><br><span class="line">)</span><br><span class="line"><span class="built_in">print</span>(response.choices[<span class="number">0</span>].message.content)</span><br></pre></td></tr></table></figure>
+<h3 id="流式输出">流式输出</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">response = client.chat.completions.create(</span><br><span class="line">    model=<span class="string">"deepseek-chat"</span>,</span><br><span class="line">    messages=[{<span class="string">"role"</span>: <span class="string">"user"</span>, <span class="string">"content"</span>: <span class="string">"你好"</span>}],</span><br><span class="line">    stream=<span class="literal">True</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">for</span> chunk <span class="keyword">in</span> response:</span><br><span class="line">    <span class="keyword">if</span> chunk.choices[<span class="number">0</span>].delta.content:</span><br><span class="line">        <span class="built_in">print</span>(chunk.choices[<span class="number">0</span>].delta.content, end=<span class="string">""</span>, flush=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p><strong>说明</strong>：</p>
 <ul>
@@ -386,9 +387,9 @@ mjx-container[display="true"] + br {
 </ul>
 </blockquote>
 <hr>
-<h2 id="二、Google-Gemini"><a href="#二、Google-Gemini" class="headerlink" title="二、Google Gemini"></a>二、Google Gemini</h2><p>Gemini 使用 Google 官方的 <code>google-genai</code> SDK，调用方式非常简洁。</p>
+<h2 id="二、Google-Gemini">二、Google Gemini</h2>
+<p>Gemini 使用 Google 官方的 <code>google-genai</code> SDK，调用方式非常简洁。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> google <span class="keyword">import</span> genai</span><br><span class="line"><span class="keyword">from</span> dotenv <span class="keyword">import</span> load_dotenv</span><br><span class="line"></span><br><span class="line">load_dotenv()</span><br><span class="line"></span><br><span class="line">client = genai.Client()</span><br><span class="line"></span><br><span class="line">response = client.models.generate_content(</span><br><span class="line">    model=<span class="string">"gemini-2.5-flash"</span>,</span><br><span class="line">    contents=<span class="string">"你好"</span></span><br><span class="line">)</span><br><span class="line"><span class="built_in">print</span>(response.text)</span><br></pre></td></tr></table></figure>
-
 <blockquote>
 <p><strong>说明</strong>：</p>
 <ul>
@@ -398,11 +399,12 @@ mjx-container[display="true"] + br {
 </ul>
 </blockquote>
 <hr>
-<h2 id="三、通义千问（Qwen）"><a href="#三、通义千问（Qwen）" class="headerlink" title="三、通义千问（Qwen）"></a>三、通义千问（Qwen）</h2><p>通义千问同样兼容 OpenAI SDK，通过阿里云 DashScope 平台提供服务。</p>
-<h3 id="基本调用-1"><a href="#基本调用-1" class="headerlink" title="基本调用"></a>基本调用</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> openai <span class="keyword">import</span> OpenAI</span><br><span class="line"><span class="keyword">from</span> dotenv <span class="keyword">import</span> load_dotenv</span><br><span class="line"></span><br><span class="line">load_dotenv()</span><br><span class="line"></span><br><span class="line">client = OpenAI(</span><br><span class="line">    api_key=os.environ.get(<span class="string">'DASHSCOPE_API_KEY'</span>),</span><br><span class="line">    base_url=<span class="string">"https://dashscope.aliyuncs.com/compatible-mode/v1"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">response = client.chat.completions.create(</span><br><span class="line">    model=<span class="string">"qwen-plus"</span>,</span><br><span class="line">    messages=[{<span class="string">"role"</span>: <span class="string">"user"</span>, <span class="string">"content"</span>: <span class="string">"你好"</span>}],</span><br><span class="line">    stream=<span class="literal">False</span></span><br><span class="line">)</span><br><span class="line"><span class="built_in">print</span>(response.choices[<span class="number">0</span>].message.content)</span><br></pre></td></tr></table></figure>
-
-<h3 id="流式输出-1"><a href="#流式输出-1" class="headerlink" title="流式输出"></a>流式输出</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">response = client.chat.completions.create(</span><br><span class="line">    model=<span class="string">"qwen-plus"</span>,</span><br><span class="line">    messages=[{<span class="string">"role"</span>: <span class="string">"user"</span>, <span class="string">"content"</span>: <span class="string">"你好"</span>}],</span><br><span class="line">    stream=<span class="literal">True</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">for</span> chunk <span class="keyword">in</span> response:</span><br><span class="line">    <span class="keyword">if</span> chunk.choices[<span class="number">0</span>].delta.content:</span><br><span class="line">        <span class="built_in">print</span>(chunk.choices[<span class="number">0</span>].delta.content, end=<span class="string">""</span>, flush=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
-
+<h2 id="三、通义千问（Qwen）">三、通义千问（Qwen）</h2>
+<p>通义千问同样兼容 OpenAI SDK，通过阿里云 DashScope 平台提供服务。</p>
+<h3 id="基本调用-2">基本调用</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> openai <span class="keyword">import</span> OpenAI</span><br><span class="line"><span class="keyword">from</span> dotenv <span class="keyword">import</span> load_dotenv</span><br><span class="line"></span><br><span class="line">load_dotenv()</span><br><span class="line"></span><br><span class="line">client = OpenAI(</span><br><span class="line">    api_key=os.environ.get(<span class="string">'DASHSCOPE_API_KEY'</span>),</span><br><span class="line">    base_url=<span class="string">"https://dashscope.aliyuncs.com/compatible-mode/v1"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">response = client.chat.completions.create(</span><br><span class="line">    model=<span class="string">"qwen-plus"</span>,</span><br><span class="line">    messages=[{<span class="string">"role"</span>: <span class="string">"user"</span>, <span class="string">"content"</span>: <span class="string">"你好"</span>}],</span><br><span class="line">    stream=<span class="literal">False</span></span><br><span class="line">)</span><br><span class="line"><span class="built_in">print</span>(response.choices[<span class="number">0</span>].message.content)</span><br></pre></td></tr></table></figure>
+<h3 id="流式输出-2">流式输出</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">response = client.chat.completions.create(</span><br><span class="line">    model=<span class="string">"qwen-plus"</span>,</span><br><span class="line">    messages=[{<span class="string">"role"</span>: <span class="string">"user"</span>, <span class="string">"content"</span>: <span class="string">"你好"</span>}],</span><br><span class="line">    stream=<span class="literal">True</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">for</span> chunk <span class="keyword">in</span> response:</span><br><span class="line">    <span class="keyword">if</span> chunk.choices[<span class="number">0</span>].delta.content:</span><br><span class="line">        <span class="built_in">print</span>(chunk.choices[<span class="number">0</span>].delta.content, end=<span class="string">""</span>, flush=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p><strong>说明</strong>：</p>
 <ul>
@@ -412,15 +414,16 @@ mjx-container[display="true"] + br {
 </ul>
 </blockquote>
 <hr>
-<h2 id="四、讯飞星火（Spark）"><a href="#四、讯飞星火（Spark）" class="headerlink" title="四、讯飞星火（Spark）"></a>四、讯飞星火（Spark）</h2><p>讯飞星火提供了专用的 <code>sparkai</code> SDK，认证方式与 OpenAI 系列不同，需要 <code>APP_ID</code>、<code>API_KEY</code>、<code>API_SECRET</code> 三个凭证。</p>
-<h3 id="4-1-Spark-Lite（基本调用）"><a href="#4-1-Spark-Lite（基本调用）" class="headerlink" title="4.1 Spark Lite（基本调用）"></a>4.1 Spark Lite（基本调用）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sparkai.llm.llm <span class="keyword">import</span> ChatSparkLLM</span><br><span class="line"><span class="keyword">from</span> sparkai.core.messages <span class="keyword">import</span> ChatMessage</span><br><span class="line"><span class="keyword">from</span> dotenv <span class="keyword">import</span> load_dotenv</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">load_dotenv()</span><br><span class="line"></span><br><span class="line">client = ChatSparkLLM(</span><br><span class="line">    spark_api_url=<span class="string">'wss://spark-api.xf-yun.com/v1.1/chat'</span>,</span><br><span class="line">    spark_app_id=os.getenv(<span class="string">'SPARKAI_APP_ID'</span>),</span><br><span class="line">    spark_api_key=os.getenv(<span class="string">'SPARKAI_API_KEY'</span>),</span><br><span class="line">    spark_api_secret=os.getenv(<span class="string">'SPARKAI_API_SECRET'</span>),</span><br><span class="line">    spark_llm_domain=<span class="string">'lite'</span>,</span><br><span class="line">    streaming=<span class="literal">False</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">response = client.generate([[ChatMessage(role=<span class="string">'user'</span>, content=<span class="string">'你好'</span>)]])</span><br><span class="line"><span class="built_in">print</span>(response.generations[<span class="number">0</span>][<span class="number">0</span>].text)</span><br></pre></td></tr></table></figure>
-
-<h3 id="4-2-Spark-Pro"><a href="#4-2-Spark-Pro" class="headerlink" title="4.2 Spark Pro"></a>4.2 Spark Pro</h3><p>只需修改 API 地址和域名：</p>
+<h2 id="四、讯飞星火（Spark）">四、讯飞星火（Spark）</h2>
+<p>讯飞星火提供了专用的 <code>sparkai</code> SDK，认证方式与 OpenAI 系列不同，需要 <code>APP_ID</code>、<code>API_KEY</code>、<code>API_SECRET</code> 三个凭证。</p>
+<h3 id="4-1-Spark-Lite（基本调用）">4.1 Spark Lite（基本调用）</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sparkai.llm.llm <span class="keyword">import</span> ChatSparkLLM</span><br><span class="line"><span class="keyword">from</span> sparkai.core.messages <span class="keyword">import</span> ChatMessage</span><br><span class="line"><span class="keyword">from</span> dotenv <span class="keyword">import</span> load_dotenv</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">load_dotenv()</span><br><span class="line"></span><br><span class="line">client = ChatSparkLLM(</span><br><span class="line">    spark_api_url=<span class="string">'wss://spark-api.xf-yun.com/v1.1/chat'</span>,</span><br><span class="line">    spark_app_id=os.getenv(<span class="string">'SPARKAI_APP_ID'</span>),</span><br><span class="line">    spark_api_key=os.getenv(<span class="string">'SPARKAI_API_KEY'</span>),</span><br><span class="line">    spark_api_secret=os.getenv(<span class="string">'SPARKAI_API_SECRET'</span>),</span><br><span class="line">    spark_llm_domain=<span class="string">'lite'</span>,</span><br><span class="line">    streaming=<span class="literal">False</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">response = client.generate([[ChatMessage(role=<span class="string">'user'</span>, content=<span class="string">'你好'</span>)]])</span><br><span class="line"><span class="built_in">print</span>(response.generations[<span class="number">0</span>][<span class="number">0</span>].text)</span><br></pre></td></tr></table></figure>
+<h3 id="4-2-Spark-Pro">4.2 Spark Pro</h3>
+<p>只需修改 API 地址和域名：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">client = ChatSparkLLM(</span><br><span class="line">    spark_api_url=<span class="string">'wss://spark-api.xf-yun.com/v3.1/chat'</span>,</span><br><span class="line">    spark_app_id=os.getenv(<span class="string">'SPARKAI_APP_ID'</span>),</span><br><span class="line">    spark_api_key=os.getenv(<span class="string">'SPARKAI_API_KEY'</span>),</span><br><span class="line">    spark_api_secret=os.getenv(<span class="string">'SPARKAI_API_SECRET'</span>),</span><br><span class="line">    spark_llm_domain=<span class="string">'generalv3'</span>,</span><br><span class="line">    streaming=<span class="literal">False</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">response = client.generate([[ChatMessage(role=<span class="string">'user'</span>, content=<span class="string">'你好'</span>)]])</span><br><span class="line"><span class="built_in">print</span>(response.generations[<span class="number">0</span>][<span class="number">0</span>].text)</span><br></pre></td></tr></table></figure>
-
-<h3 id="4-3-多轮对话"><a href="#4-3-多轮对话" class="headerlink" title="4.3 多轮对话"></a>4.3 多轮对话</h3><p>通过维护消息历史列表来实现多轮对话：</p>
+<h3 id="4-3-多轮对话">4.3 多轮对话</h3>
+<p>通过维护消息历史列表来实现多轮对话：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sparkai.llm.llm <span class="keyword">import</span> ChatSparkLLM</span><br><span class="line"><span class="keyword">from</span> sparkai.core.messages <span class="keyword">import</span> ChatMessage</span><br><span class="line"><span class="keyword">from</span> dotenv <span class="keyword">import</span> load_dotenv</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">load_dotenv()</span><br><span class="line"></span><br><span class="line">spark = ChatSparkLLM(</span><br><span class="line">    spark_api_url=<span class="string">'wss://spark-api.xf-yun.com/v1.1/chat'</span>,</span><br><span class="line">    spark_app_id=os.getenv(<span class="string">'SPARKAI_APP_ID'</span>),</span><br><span class="line">    spark_api_key=os.getenv(<span class="string">'SPARKAI_API_KEY'</span>),</span><br><span class="line">    spark_api_secret=os.getenv(<span class="string">'SPARKAI_API_SECRET'</span>),</span><br><span class="line">    spark_llm_domain=<span class="string">'lite'</span>,</span><br><span class="line">    streaming=<span class="literal">False</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">messages = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    user_input = <span class="built_in">input</span>(<span class="string">"用户:"</span>).strip()</span><br><span class="line">    <span class="keyword">if</span> user_input.lower() <span class="keyword">in</span> {<span class="string">'退出'</span>, <span class="string">'exit'</span>, <span class="string">'quit'</span>, <span class="string">'q'</span>}:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"会话已结束。"</span>)</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> user_input:</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 添加用户消息到历史</span></span><br><span class="line">    messages.append(ChatMessage(role=<span class="string">'user'</span>, content=user_input))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 调用模型（传入完整历史以保持上下文）</span></span><br><span class="line">    result = spark.generate([messages])</span><br><span class="line">    reply = result.generations[<span class="number">0</span>][<span class="number">0</span>].text</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(reply)</span><br><span class="line">    <span class="comment"># 添加助手回复到历史</span></span><br><span class="line">    messages.append(ChatMessage(role=<span class="string">'assistant'</span>, content=reply))</span><br></pre></td></tr></table></figure>
-
 <blockquote>
 <p><strong>说明</strong>：</p>
 <ul>
@@ -428,7 +431,8 @@ mjx-container[display="true"] + br {
 <li>详见 <a target="_blank" rel="noopener" href="https://www.xfyun.cn/doc/spark/Web.html">讯飞星火 API 文档</a>。</li>
 </ul>
 </blockquote>
-<h3 id="各版本对照表"><a href="#各版本对照表" class="headerlink" title="各版本对照表"></a>各版本对照表</h3><table>
+<h3 id="各版本对照表">各版本对照表</h3>
+<table>
 <thead>
 <tr>
 <th>版本</th>
@@ -436,7 +440,8 @@ mjx-container[display="true"] + br {
 <th>Domain</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>Lite</td>
 <td><code>wss://spark-api.xf-yun.com/v1.1/chat</code></td>
 <td><code>lite</code></td>
@@ -456,9 +461,11 @@ mjx-container[display="true"] + br {
 <td><code>wss://spark-api.xf-yun.com/v1/x1</code></td>
 <td><code>spark-x</code></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <hr>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><table>
+<h2 id="总结">总结</h2>
+<table>
 <thead>
 <tr>
 <th>模型</th>
@@ -467,7 +474,8 @@ mjx-container[display="true"] + br {
 <th>认证方式</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>DeepSeek</td>
 <td><code>openai</code></td>
 <td>✅</td>
@@ -491,7 +499,8 @@ mjx-container[display="true"] + br {
 <td>❌（专用SDK）</td>
 <td>APP_ID + API_KEY + API_SECRET</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>可以看到，DeepSeek 和通义千问都兼容 OpenAI 的 SDK 格式，只需修改 <code>base_url</code> 和 <code>api_key</code> 就能直接使用，上手非常简单。Gemini 和讯飞星火则使用各自的专用 SDK，调用方式略有不同但也并不复杂。</p>
 
     
@@ -561,11 +570,11 @@ mjx-container[display="true"] + br {
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">LLM</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">LLM</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -650,6 +659,15 @@ mjx-container[display="true"] + br {
 
 
 <nav id="article-nav">
+  
+    <a href="/2026/04/15/Claude%20Code%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Claude Code使用指南
+        
+      </div>
+    </a>
   
   
     <a href="/2026/02/01/Github%E5%AD%A6%E7%94%9F%E8%AE%A4%E8%AF%81%E6%8C%87%E5%8D%97/" id="article-nav-older" class="article-nav-link-wrap">
@@ -815,6 +833,38 @@ mjx-container[display="true"] + br {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">GitHub</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">学生认证</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">教程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">GitHub Student Pack</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Claude</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">AI编程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">代码助手</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">开发工具</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">PyBullet</a>
               </li>
              
@@ -839,7 +889,15 @@ mjx-container[display="true"] + br {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">LLM</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">AI</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -848,30 +906,6 @@ mjx-container[display="true"] + br {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">项目实战</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">GitHub</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">学生认证</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">教程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">GitHub Student Pack</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">AI</a>
               </li>
             
             <div class="clearfix"></div>
@@ -1079,6 +1113,50 @@ mjx-container[display="true"] + br {
   
   
   
+  
+  <!-- Copy Button Functionality -->
+  <script>
+  function copyCode(text) {
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = event.target;
+      const originalText = btn.textContent;
+      btn.textContent = '✓ 已复制';
+      btn.style.background = '#52c41a';
+      
+      setTimeout(() => {
+        btn.textContent = originalText;
+        btn.style.background = '';
+      }, 2000);
+    }).catch(err => {
+      console.error('复制失败:', err);
+      alert('复制失败，请手动复制');
+    });
+  }
+  </script>
+  
+  <style>
+  .copy-btn {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 6px 12px;
+    background: #1890ff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s;
+  }
+  
+  .copy-btn:hover {
+    background: #40a9ff;
+    opacity: 0.9;
+  }
+  
+  .copy-btn:active {
+    transform: scale(0.98);
+  }
+  </style>
 </body>
 
 </html>
